@@ -18,14 +18,14 @@ icon=pygame.image.load("image.jpg")
 pygame.display.set_icon(icon)
 
 #colors
-bgcolor=(255,255,255)
+bgcolor=(124,252,0)
 ballcolor=(255,165,0)
 player1color=(255,0,0)
 player2color=(0,0,0)
 linecolor=(0,0,0)
 
 #creating shapes
-ball=pygame.Rect(screenwidth/2-15,screenheight/2-15,30,30)
+ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
 player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
@@ -35,6 +35,14 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.quit()
+            
+    #drawing objects
+    screen.fill(bgcolor)
+    pygame.draw.rect(screen,player1color,player1)
+    pygame.draw.rect(screen,player2color,player2)        
+    pygame.draw.ellipse(screen,ballcolor,ball)        
+    pygame.draw.aaline(screen,linecolor,(screenwidth/2,0),(screenwidth/2,screenheight))        
+            
            
     pygame.display.flip() 
     clock.tick(144)            
