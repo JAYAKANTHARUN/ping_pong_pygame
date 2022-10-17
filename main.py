@@ -43,6 +43,6 @@ while True:
     pygame.draw.ellipse(screen,ballcolor,ball)        
     pygame.draw.aaline(screen,linecolor,(screenwidth/2,0),(screenwidth/2,screenheight))        
             
-           
+    #updating window       
     pygame.display.flip() 
     clock.tick(144)            
