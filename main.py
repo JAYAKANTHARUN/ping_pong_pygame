@@ -13,6 +13,10 @@ screen=pygame.display.set_mode((screenwidth,screenheight))
 #name for window
 name=pygame.display.set_caption("Ping Pong Game")
 
+#icon for game
+icon=pygame.image.load("image.jpg")
+pygame.display.set_icon(icon)
+
 #run the window
 while True:
     for event in pygame.event.get():
