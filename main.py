@@ -17,7 +17,7 @@ name=pygame.display.set_caption("Ping Pong Game")
 icon=pygame.image.load("image.jpg")
 pygame.display.set_icon(icon)
 
-#colors
+#colours
 bgcolor=(124,252,0)
 ballcolor=(255,165,0)
 player1color=(255,0,0)
