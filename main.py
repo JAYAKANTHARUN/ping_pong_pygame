@@ -29,12 +29,26 @@ ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
 player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
+#speed 
+ballspeedx=1
+ballspeedy=1
+
 #run the window
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.quit()
+    
+    #speed
+    ball.x+=ballspeedx
+    ball.y+=ballspeedy   
+    
+    #bounce
+    if ball.top<=10 or ball.bottom>=screenheight-10:
+        ballspeedy*=-1
+    if ball.left<=10 or ball.right>=screenwidth-10:
+        ballspeedx*=-1         
             
     #drawing objects and Lines        
     screen.fill(bgcolor)        
