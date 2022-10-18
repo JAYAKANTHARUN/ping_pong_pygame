@@ -48,7 +48,11 @@ while True:
     if ball.top<=10 or ball.bottom>=screenheight-10:
         ballspeedy*=-1
     if ball.left<=10 or ball.right>=screenwidth-10:
-        ballspeedx*=-1         
+        ballspeedx*=-1 
+        
+    #collide
+    if ball.colliderect(player1) or ball.colliderect(player2):
+        ballspeedx*=-1            
             
     #drawing objects and Lines        
     screen.fill(bgcolor)        
