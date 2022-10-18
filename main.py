@@ -36,12 +36,16 @@ while True:
             pygame.quit()
             sys.quit()
             
-    #drawing objects
-    screen.fill(bgcolor)
+    #drawing objects and Lines        
+    screen.fill(bgcolor)        
     pygame.draw.rect(screen,player1color,player1)
-    pygame.draw.rect(screen,player2color,player2)        
-    pygame.draw.ellipse(screen,ballcolor,ball)        
-    pygame.draw.aaline(screen,linecolor,(screenwidth/2,0),(screenwidth/2,screenheight))        
+    pygame.draw.rect(screen,player2color,player2)
+    pygame.draw.ellipse(screen,ballcolor,ball)
+    pygame.draw.line(screen,linecolor,[10,10],[screenwidth-10,10])
+    pygame.draw.line(screen,linecolor,[10,10],[10,screenheight-10])
+    pygame.draw.line(screen,linecolor,[10,screenheight-10],[screenwidth-10,screenheight-10])
+    pygame.draw.line(screen,linecolor,[screenwidth-10,10],[screenwidth-10,screenheight-10])
+    pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
             
     #updating window       
     pygame.display.flip() 
