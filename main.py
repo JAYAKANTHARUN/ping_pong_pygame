@@ -13,7 +13,8 @@ def playeranimation():
 
 def ballanimation():
     global ballspeedx,ballspeedy
-      #speed
+    
+    #speed
     ball.x+=ballspeedx
     ball.y+=ballspeedy   
     
@@ -61,7 +62,7 @@ ballspeedx=4
 ballspeedy=4
 player1speed=0
 player2speed=0
-speed=4
+speed=3
 
 
 #run the window
@@ -113,4 +114,4 @@ while True:
             
     #updating window       
     pygame.display.flip() 
-    clock.tick(144)            
+    clock.tick(200)            
