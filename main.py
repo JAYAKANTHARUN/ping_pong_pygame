@@ -1,5 +1,5 @@
 #import pygame library
-import pygame,sys
+import pygame,sys,random
 
 def playeranimation():
     if player1.top<=10:
@@ -22,12 +22,17 @@ def ballanimation():
     if ball.top<=10 or ball.bottom>=screenheight-10:
         ballspeedy*=-1
     if ball.left<=10 or ball.right>=screenwidth-10:
-        ballspeedx*=-1 
+        ballstart() 
         
     #collide
     if ball.colliderect(player1) or ball.colliderect(player2):
         ballspeedx*=-1            
-            
+
+def ballstart():
+    global ballspeedx,ballspeedy
+    ball.center = (screenwidth/2, screenheight/2)
+    ballspeedy *= random.choice((1,-1)) 
+    ballspeedx *= random.choice((1,-1))                        
 
 pygame.init()
 
@@ -58,11 +63,11 @@ player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
 #speed 
-ballspeedx=4
-ballspeedy=4
+ballspeedx=3
+ballspeedy=3 
 player1speed=0
 player2speed=0
-speed=3
+speed=4
 
 
 #run the window
