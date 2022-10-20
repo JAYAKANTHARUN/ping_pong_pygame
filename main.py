@@ -1,6 +1,16 @@
 #import pygame library
 import pygame,sys
 
+def playeranimation():
+    if player1.top<=10:
+        player1.top=10
+    if player1.bottom>=screenheight-10:
+        player1.bottom=screenheight-10
+    if player2.top<=10:
+        player2.top=10
+    if player2.bottom>=screenheight-10:
+        player2.bottom=screenheight-10
+
 def ballanimation():
     global ballspeedx,ballspeedy
       #speed
@@ -60,31 +70,36 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.quit()
+        
         if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_w:
-                player1speed+=speed
             if event.key==pygame.K_s:
+                player1speed+=speed
+            if event.key==pygame.K_w:
                 player1speed-=speed
         if event.type==pygame.KEYUP:
-            if event.key==pygame.K_w:
-                player1speed-=speed
             if event.key==pygame.K_s:
+                player1speed-=speed
+            if event.key==pygame.K_w:
                 player1speed+=speed 
                 
         if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_UP:
-                player2speed+=speed
             if event.key==pygame.K_DOWN:
+                player2speed+=speed
+            if event.key==pygame.K_UP:
                 player2speed-=speed 
         if event.type==pygame.KEYUP:
-            if event.key==pygame.K_UP:
-                player2speed-=speed
             if event.key==pygame.K_DOWN:
+                player2speed-=speed
+            if event.key==pygame.K_UP:
                 player2speed+=speed    
-                                         
     
+    player1.y+=player1speed
+    player2.y+=player2speed
     
     ballanimation()
+    
+    playeranimation()
+    
     #drawing objects and Lines        
     screen.fill(bgcolor)        
     pygame.draw.rect(screen,player1color,player1)
