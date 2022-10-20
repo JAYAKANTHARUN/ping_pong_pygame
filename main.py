@@ -1,6 +1,23 @@
 #import pygame library
 import pygame,sys
 
+def ballanimation():
+    global ballspeedx,ballspeedy
+      #speed
+    ball.x+=ballspeedx
+    ball.y+=ballspeedy   
+    
+    #bounce
+    if ball.top<=10 or ball.bottom>=screenheight-10:
+        ballspeedy*=-1
+    if ball.left<=10 or ball.right>=screenwidth-10:
+        ballspeedx*=-1 
+        
+    #collide
+    if ball.colliderect(player1) or ball.colliderect(player2):
+        ballspeedx*=-1            
+            
+
 pygame.init()
 
 clock=pygame.time.Clock()
@@ -30,8 +47,9 @@ player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
 #speed 
-ballspeedx=1
-ballspeedy=1
+ballspeedx=4
+ballspeedy=4
+
 
 #run the window
 while True:
@@ -39,21 +57,9 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.quit()
-    
-    #speed
-    ball.x+=ballspeedx
-    ball.y+=ballspeedy   
-    
-    #bounce
-    if ball.top<=10 or ball.bottom>=screenheight-10:
-        ballspeedy*=-1
-    if ball.left<=10 or ball.right>=screenwidth-10:
-        ballspeedx*=-1 
         
-    #collide
-    if ball.colliderect(player1) or ball.colliderect(player2):
-        ballspeedx*=-1            
-            
+    
+    ballanimation()
     #drawing objects and Lines        
     screen.fill(bgcolor)        
     pygame.draw.rect(screen,player1color,player1)
