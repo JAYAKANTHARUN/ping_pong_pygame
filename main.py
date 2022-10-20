@@ -49,6 +49,9 @@ player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 #speed 
 ballspeedx=4
 ballspeedy=4
+player1speed=0
+player2speed=0
+speed=4
 
 
 #run the window
@@ -57,7 +60,29 @@ while True:
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.quit()
-        
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_w:
+                player1speed+=speed
+            if event.key==pygame.K_s:
+                player1speed-=speed
+        if event.type==pygame.KEYUP:
+            if event.key==pygame.K_w:
+                player1speed-=speed
+            if event.key==pygame.K_s:
+                player1speed+=speed 
+                
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_UP:
+                player2speed+=speed
+            if event.key==pygame.K_DOWN:
+                player2speed-=speed 
+        if event.type==pygame.KEYUP:
+            if event.key==pygame.K_UP:
+                player2speed-=speed
+            if event.key==pygame.K_DOWN:
+                player2speed+=speed    
+                                         
+    
     
     ballanimation()
     #drawing objects and Lines        
