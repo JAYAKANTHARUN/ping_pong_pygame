@@ -1,6 +1,7 @@
 #import pygame library
 import pygame,sys,random
 
+#player animation
 def playeranimation():
     if player1.top<=10:
         player1.top=10
@@ -11,6 +12,7 @@ def playeranimation():
     if player2.bottom>=screenheight-10:
         player2.bottom=screenheight-10
 
+#ball animation
 def ballanimation():
     global ballspeedx,ballspeedy
     
@@ -18,20 +20,21 @@ def ballanimation():
     ball.x+=ballspeedx
     ball.y+=ballspeedy   
     
-    #bounce
+    #bounce back and regeneration
     if ball.top<=10 or ball.bottom>=screenheight-10:
         ballspeedy*=-1
     if ball.left<=10 or ball.right>=screenwidth-10:
         ballstart() 
         
-    #collide
+    #collide with player
     if ball.colliderect(player1) or ball.colliderect(player2):
         ballspeedx*=-1            
 
+#ball regeneration
 def ballstart():
     global ballspeedx,ballspeedy
     ball.center = (screenwidth/2, screenheight/2)
-    ballspeedy *= random.choice((1,-1)) 
+    ballspeedy *= random.choice((1,-1)) # this is done to move the ball after colliding with side walls
     ballspeedx *= random.choice((1,-1))                        
 
 pygame.init()
@@ -51,7 +54,7 @@ icon=pygame.image.load("image.jpg")
 pygame.display.set_icon(icon)
 
 #colours
-bgcolor=(124,252,0)
+bgcolor=(144,238,144)
 ballcolor=(255,165,0)
 player1color=(255,0,0)
 player2color=(0,0,0)
@@ -63,8 +66,8 @@ player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
 #speed 
-ballspeedx=3
-ballspeedy=3 
+ballspeedx=3 * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
+ballspeedy=3 * random.choice((1,-1))
 player1speed=0
 player2speed=0
 speed=4
@@ -77,6 +80,7 @@ while True:
             pygame.quit()
             sys.quit()
         
+        #configuring buttons
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_s:
                 player1speed+=speed
@@ -119,4 +123,4 @@ while True:
             
     #updating window       
     pygame.display.flip() 
-    clock.tick(200)            
+    clock.tick(144)            
