@@ -59,7 +59,7 @@ ballcolor=(255,165,0)
 player1color=(255,0,0)
 player2color=(0,0,0)
 linecolor=(0,0,0)
-scorecolor=(32,78,41)
+scorecolor=(0,96,255)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -125,6 +125,12 @@ while True:
     pygame.draw.line(screen,linecolor,[10,screenheight-10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth-10,10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
+      
+    #displaying scores   
+    player1text=scorefont.render(f"{player1score}",False,scorecolor)   
+    screen.blit(player1text,(screenwidth/2-32,screenheight/2))
+    player2text=scorefont.render(f"{player2score}",False,scorecolor)   
+    screen.blit(player2text,(screenwidth/2+20,screenheight/2))  
             
     #updating window       
     pygame.display.flip() 
