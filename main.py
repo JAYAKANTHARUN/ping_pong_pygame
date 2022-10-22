@@ -59,6 +59,7 @@ ballcolor=(255,165,0)
 player1color=(255,0,0)
 player2color=(0,0,0)
 linecolor=(0,0,0)
+scorecolor=(32,78,41)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -72,6 +73,10 @@ player1speed=0
 player2speed=0
 speed=4
 
+#score details
+player1score=0
+player2score=0
+scorefont=pygame.font.Font("freesansbold.ttf",32)
 
 #run the window
 while True:
