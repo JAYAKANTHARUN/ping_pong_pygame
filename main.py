@@ -79,6 +79,9 @@ linecolor=(0,0,0)
 scorecolor=(0,96,255)
 timecolor=(255,0,255)
 welcomecolor=(255,0,0)
+wincolor=(255,0,127)
+
+
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -99,10 +102,14 @@ player2score=0
 scorefont=pygame.font.Font("freesansbold.ttf",20)
 
 #score time
-scoretime=True
+scoretime=None
 timefont=pygame.font.Font("freesansbold.ttf",32)
 
+#welcome
 welcomefont=pygame.font.SysFont("script",32)
+
+#win
+winfont=pygame.font.SysFont("script",50)
 
 #run the window
 while True:
@@ -154,22 +161,36 @@ while True:
     welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
     screen.blit(welcometext,(screenwidth/2-190,20))
     
+    #displaying scores   
+    player1text=scorefont.render(f"{player1score}",False,scorecolor)   
+    screen.blit(player1text,(screenwidth/2-32,screenheight/2))
+    player2text=scorefont.render(f"{player2score}",False,scorecolor)   
+    screen.blit(player2text,(screenwidth/2+20,screenheight/2))
+    playername1text=scorefont.render("Player 1",False,scorecolor)   
+    screen.blit(playername1text,(screenwidth/2-90,screenheight/2-20))
+    playername2text=scorefont.render("Player 2",False,scorecolor)   
+    screen.blit(playername2text,(screenwidth/2+20,screenheight/2-20))
+    
     pygame.draw.ellipse(screen,ballcolor,ball)
            
     
     if scoretime:
         ballstart()
            
-      
-    #displaying scores   
-    player1text=scorefont.render(f"{player1score}",False,scorecolor)   
-    screen.blit(player1text,(screenwidth/2-32,screenheight/2))
-    player2text=scorefont.render(f"{player2score}",False,scorecolor)   
-    screen.blit(player2text,(screenwidth/2+20,screenheight/2))
     
-    if player1score==2 or player2score==2:
+    #game end
+    '''if player1score==1:
+        win1text=winfont.render("!! Player1 wins !!",False,wincolor)   
+        screen.blit(win1text,(screenwidth/2+20,screenheight/2))
+        pygame.time.wait(2000)
         pygame.quit()
-        sys.quit()  
+        sys.quit()     
+    if player2score==1:
+        win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
+        screen.blit(win2text,(screenwidth/2+20,screenheight/2))
+        pygame.time.wait(2000)
+        pygame.quit()
+        sys.quit()'''
             
     #updating window       
     pygame.display.flip() 
