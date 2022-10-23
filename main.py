@@ -78,6 +78,7 @@ player2color=(0,0,0)
 linecolor=(0,0,0)
 scorecolor=(0,96,255)
 timecolor=(255,0,255)
+welcomecolor=(255,0,0)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -100,6 +101,8 @@ scorefont=pygame.font.Font("freesansbold.ttf",20)
 #score time
 scoretime=True
 timefont=pygame.font.Font("freesansbold.ttf",32)
+
+welcomefont=pygame.font.SysFont("script",32)
 
 #run the window
 while True:
@@ -142,12 +145,17 @@ while True:
     screen.fill(bgcolor)        
     pygame.draw.rect(screen,player1color,player1)
     pygame.draw.rect(screen,player2color,player2)
-    pygame.draw.ellipse(screen,ballcolor,ball)
     pygame.draw.line(screen,linecolor,[10,10],[screenwidth-10,10])
     pygame.draw.line(screen,linecolor,[10,10],[10,screenheight-10])
     pygame.draw.line(screen,linecolor,[10,screenheight-10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth-10,10],[screenwidth-10,screenheight-10])
-    pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
+    pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])
+    
+    welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
+    screen.blit(welcometext,(screenwidth/2-190,20))
+    
+    pygame.draw.ellipse(screen,ballcolor,ball)
+           
     
     if scoretime:
         ballstart()
@@ -157,7 +165,11 @@ while True:
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
     screen.blit(player1text,(screenwidth/2-32,screenheight/2))
     player2text=scorefont.render(f"{player2score}",False,scorecolor)   
-    screen.blit(player2text,(screenwidth/2+20,screenheight/2))  
+    screen.blit(player2text,(screenwidth/2+20,screenheight/2))
+    
+    if player1score==2 or player2score==2:
+        pygame.quit()
+        sys.quit()  
             
     #updating window       
     pygame.display.flip() 
