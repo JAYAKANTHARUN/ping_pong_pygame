@@ -25,13 +25,13 @@ def ballanimation():
         ballspeedy*=-1
     if ball.left<=10:
         player2score+=1 
-        if player2score==1:
-            win2time=pygame.time.get_ticks()
+        if player2score==winscore:
+            win2time=pygame.time.get_ticks()#return present time in milliseconds
         scoretime=pygame.time.get_ticks()
         
     if ball.right>=screenwidth-10:
         player1score+=1  
-        if player1score==1:
+        if player1score==winscore:
             win1time=pygame.time.get_ticks()  
         scoretime=pygame.time.get_ticks()
         
@@ -49,15 +49,16 @@ def ballstart():
         timetext=timefont.render(f"{math.floor(4-((currenttime-scoretime)/1000))}",False,timecolor)
         screen.blit(timetext,(screenwidth-30,20))
     else:
-        ballspeedy=3*random.choice((1,-1)) # this is done to move the ball after colliding with side walls
-        ballspeedx=3*random.choice((1,-1))
+        ballspeedy=ballspeed*random.choice((1,-1)) # this is done to move the ball after colliding with side walls
+        ballspeedx=ballspeed*random.choice((1,-1))
         scoretime=None    
 
+#display win message
 def display1win():
     global win1time,ballspeedx,ballspeedy
     ball.center = (screenwidth/2, screenheight/2)
     close1time=pygame.time.get_ticks()
-    if close1time-win1time<1000:
+    if close1time-win1time<2000:
         ballspeedx,ballspeedy=0,0
         win1text=winfont.render("!! Player1 wins !!",False,wincolor)   
         screen.blit(win1text,(screenwidth/2-360,screenheight/2+100))
@@ -69,14 +70,14 @@ def display2win():
     global win2time,ballspeedx,ballspeedy
     ball.center = (screenwidth/2, screenheight/2)
     close2time=pygame.time.get_ticks()
-    if close2time-win2time<1000:
+    if close2time-win2time<2000:
         ballspeedx,ballspeedy=0,0
         win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
         screen.blit(win2text,(screenwidth/2+20,screenheight/2+100))
     else:
         pygame.quit()
         sys.quit()        
-        
+
 pygame.init()
 
 clock=pygame.time.Clock()
@@ -107,12 +108,12 @@ wincolor=(255,0,127)
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
 player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
-player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
+player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120) 
 
 #speed 
-#ballspeed=3
-ballspeedx=3 * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
-ballspeedy=3 * random.choice((1,-1))
+ballspeed=4
+ballspeedx=ballspeed * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
+ballspeedy=ballspeed * random.choice((1,-1))
 player1speed=0
 player2speed=0
 speed=4
@@ -120,19 +121,20 @@ speed=4
 #score details
 player1score=0
 player2score=0
-scorefont=pygame.font.Font("freesansbold.ttf",20)
+scorefont=pygame.font.SysFont("castellar",20)
 
 #score time
-scoretime=None
-timefont=pygame.font.Font("freesansbold.ttf",32)
+scoretime=True
+timefont=pygame.font.SysFont("algerian",32)
 
 #welcome
-welcomefont=pygame.font.SysFont("script",32)
+welcomefont=pygame.font.SysFont("algerian",32)
 
 #win
 win1time=None
 win2time=None
 winfont=pygame.font.SysFont("script",50)
+winscore=5
 
 #run the window
 while True:
@@ -181,8 +183,9 @@ while True:
     pygame.draw.line(screen,linecolor,[screenwidth-10,10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])
     
+    #displays welcome message
     welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
-    screen.blit(welcometext,(screenwidth/2-190,20))
+    screen.blit(welcometext,(screenwidth/2-250,20))
     
     #displaying scores   
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
@@ -190,7 +193,7 @@ while True:
     player2text=scorefont.render(f"{player2score}",False,scorecolor)   
     screen.blit(player2text,(screenwidth/2+20,screenheight/2))
     playername1text=scorefont.render("Player 1",False,scorecolor)   
-    screen.blit(playername1text,(screenwidth/2-90,screenheight/2-20))
+    screen.blit(playername1text,(screenwidth/2-115,screenheight/2-20))
     playername2text=scorefont.render("Player 2",False,scorecolor)   
     screen.blit(playername2text,(screenwidth/2+20,screenheight/2-20))
     
