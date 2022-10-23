@@ -14,7 +14,7 @@ def playeranimation():
 
 #ball animation
 def ballanimation():
-    global ballspeedx,ballspeedy,player1score,player2score
+    global ballspeedx,ballspeedy,player1score,player2score,scoretime
     
     #speed
     ball.x+=ballspeedx
@@ -24,11 +24,14 @@ def ballanimation():
     if ball.top<=10 or ball.bottom>=screenheight-10:
         ballspeedy*=-1
     if ball.left<=10:
-        ballstart()
+        #ballstart()
         player2score+=1 
+        scoretime=pygame.time.get_ticks()
     if ball.right>=screenwidth-10:
-        ballstart()
+        #ballstart()
         player1score+=1    
+        scoretime=pygame.time.get_ticks()
+        
         
     #collide with player
     if ball.colliderect(player1) or ball.colliderect(player2):
@@ -82,6 +85,9 @@ player1score=0
 player2score=0
 scorefont=pygame.font.Font("freesansbold.ttf",20)
 
+#score time
+scoretime=None
+
 #run the window
 while True:
     for event in pygame.event.get():
@@ -129,6 +135,9 @@ while True:
     pygame.draw.line(screen,linecolor,[10,screenheight-10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth-10,10],[screenwidth-10,screenheight-10])
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
+    
+    if scoretime:
+        ballstart()
       
     #displaying scores   
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
