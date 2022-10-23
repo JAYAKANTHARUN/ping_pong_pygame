@@ -1,5 +1,5 @@
 #import pygame library
-import pygame,sys,random
+import pygame,sys,random,math
 
 #player animation
 def playeranimation():
@@ -44,8 +44,11 @@ def ballstart():
     currenttime=pygame.time.get_ticks()
     ball.center = (screenwidth/2, screenheight/2)
     
+    
     if currenttime-scoretime<3000:
         ballspeedx,ballspeedy=0,0
+        timetext=timefont.render(f"{math.floor(4-((currenttime-scoretime)/1000))}",False,timecolor)
+        screen.blit(timetext,(screenwidth-30,20))
     else:
         ballspeedy=3*random.choice((1,-1)) # this is done to move the ball after colliding with side walls
         ballspeedx=3*random.choice((1,-1))
@@ -74,6 +77,7 @@ player1color=(255,0,0)
 player2color=(0,0,0)
 linecolor=(0,0,0)
 scorecolor=(0,96,255)
+timecolor=(255,0,255)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -94,7 +98,8 @@ player2score=0
 scorefont=pygame.font.Font("freesansbold.ttf",20)
 
 #score time
-scoretime=None
+scoretime=True
+timefont=pygame.font.Font("freesansbold.ttf",32)
 
 #run the window
 while True:
@@ -145,7 +150,8 @@ while True:
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
     
     if scoretime:
-        ballstart()   
+        ballstart()
+           
       
     #displaying scores   
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
