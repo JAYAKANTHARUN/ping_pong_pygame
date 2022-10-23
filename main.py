@@ -53,7 +53,29 @@ def ballstart():
         ballspeedx=3*random.choice((1,-1))
         scoretime=None    
 
-        
+def display1win():
+    global win1time,ballspeedx,ballspeedy
+    ball.center = (screenwidth/2, screenheight/2)
+    close1time=pygame.time.get_ticks()
+    if close1time-win1time<1000:
+        ballspeedx,ballspeedy=0,0
+        win1text=winfont.render("!! Player1 wins !!",False,wincolor)   
+        screen.blit(win1text,(screenwidth/2-360,screenheight/2+100))
+    else:
+        pygame.quit()
+        sys.quit()
+      
+def display2win():
+    global win2time,ballspeedx,ballspeedy
+    ball.center = (screenwidth/2, screenheight/2)
+    close2time=pygame.time.get_ticks()
+    if close2time-win2time<1000:
+        ballspeedx,ballspeedy=0,0
+        win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
+        screen.blit(win2text,(screenwidth/2+20,screenheight/2+100))
+    else:
+        pygame.quit()
+        sys.quit()        
         
 pygame.init()
 
