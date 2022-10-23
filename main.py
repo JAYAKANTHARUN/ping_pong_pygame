@@ -39,11 +39,18 @@ def ballanimation():
 
 #ball regeneration
 def ballstart():
-    global ballspeedx,ballspeedy
+    global ballspeedx,ballspeedy,scoretime
+    
+    currenttime=pygame.time.get_ticks()
     ball.center = (screenwidth/2, screenheight/2)
-    ballspeedy *= random.choice((1,-1)) # this is done to move the ball after colliding with side walls
-    ballspeedx *= random.choice((1,-1))                        
-
+    
+    if currenttime-scoretime<3000:
+        ballspeedx,ballspeedy=0,0
+    else:
+        ballspeedy=3*random.choice((1,-1)) # this is done to move the ball after colliding with side walls
+        ballspeedx=3*random.choice((1,-1))
+        scoretime=None    
+        
 pygame.init()
 
 clock=pygame.time.Clock()
@@ -74,6 +81,7 @@ player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120)
 
 #speed 
+#ballspeed=3
 ballspeedx=3 * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
 ballspeedy=3 * random.choice((1,-1))
 player1speed=0
@@ -137,7 +145,7 @@ while True:
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])       
     
     if scoretime:
-        ballstart()
+        ballstart()   
       
     #displaying scores   
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
