@@ -14,7 +14,7 @@ def playeranimation():
 
 #ball animation
 def ballanimation():
-    global ballspeedx,ballspeedy,player1score,player2score,scoretime
+    global ballspeedx,ballspeedy,player1score,player2score,scoretime,win1time,win2time
     
     #speed
     ball.x+=ballspeedx
@@ -24,14 +24,16 @@ def ballanimation():
     if ball.top<=10 or ball.bottom>=screenheight-10:
         ballspeedy*=-1
     if ball.left<=10:
-        #ballstart()
         player2score+=1 
-        scoretime=pygame.time.get_ticks()
-    if ball.right>=screenwidth-10:
-        #ballstart()
-        player1score+=1    
+        if player2score==1:
+            win2time=pygame.time.get_ticks()
         scoretime=pygame.time.get_ticks()
         
+    if ball.right>=screenwidth-10:
+        player1score+=1  
+        if player1score==1:
+            win1time=pygame.time.get_ticks()  
+        scoretime=pygame.time.get_ticks()
         
     #collide with player
     if ball.colliderect(player1) or ball.colliderect(player2):
@@ -40,11 +42,8 @@ def ballanimation():
 #ball regeneration
 def ballstart():
     global ballspeedx,ballspeedy,scoretime
-    
     currenttime=pygame.time.get_ticks()
     ball.center = (screenwidth/2, screenheight/2)
-    
-    
     if currenttime-scoretime<3000:
         ballspeedx,ballspeedy=0,0
         timetext=timefont.render(f"{math.floor(4-((currenttime-scoretime)/1000))}",False,timecolor)
@@ -53,6 +52,8 @@ def ballstart():
         ballspeedy=3*random.choice((1,-1)) # this is done to move the ball after colliding with side walls
         ballspeedx=3*random.choice((1,-1))
         scoretime=None    
+
+        
         
 pygame.init()
 
@@ -81,8 +82,6 @@ timecolor=(255,0,255)
 welcomecolor=(255,0,0)
 wincolor=(255,0,127)
 
-
-
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
 player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
@@ -109,6 +108,8 @@ timefont=pygame.font.Font("freesansbold.ttf",32)
 welcomefont=pygame.font.SysFont("script",32)
 
 #win
+win1time=None
+win2time=None
 winfont=pygame.font.SysFont("script",50)
 
 #run the window
@@ -173,25 +174,14 @@ while True:
     
     pygame.draw.ellipse(screen,ballcolor,ball)
            
+    if win1time:
+        display1win()
+    if win2time:
+        display2win()
     
     if scoretime:
         ballstart()
-           
-    
-    #game end
-    '''if player1score==1:
-        win1text=winfont.render("!! Player1 wins !!",False,wincolor)   
-        screen.blit(win1text,(screenwidth/2+20,screenheight/2))
-        pygame.time.wait(2000)
-        pygame.quit()
-        sys.quit()     
-    if player2score==1:
-        win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
-        screen.blit(win2text,(screenwidth/2+20,screenheight/2))
-        pygame.time.wait(2000)
-        pygame.quit()
-        sys.quit()'''
-            
+                   
     #updating window       
     pygame.display.flip() 
     clock.tick(144)            
