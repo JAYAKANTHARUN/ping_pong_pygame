@@ -116,6 +116,7 @@ scorecolor=(0,96,255)
 timecolor=(255,0,255)
 welcomecolor=(255,0,0)
 wincolor=(255,0,127)
+aimcolor=(81,4,0)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
@@ -147,6 +148,9 @@ win1time=None
 win2time=None
 winfont=pygame.font.SysFont("script",50)
 winscore=5
+
+#aim
+aimfont=pygame.font.SysFont("algerian",25)
 
 #run the window
 while True:
@@ -199,6 +203,9 @@ while True:
     welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
     screen.blit(welcometext,(screenwidth/2-250,20))
     
+    aimtext=aimfont.render(f"First to score {winscore} point wins",False,aimcolor)
+    screen.blit(aimtext,(screenwidth/2-175,screenheight-50))
+    
     #displaying scores   
     player1text=scorefont.render(f"{player1score}",False,scorecolor)   
     screen.blit(player1text,(screenwidth/2-32,screenheight/2))
@@ -209,7 +216,7 @@ while True:
     playername2text=scorefont.render("Player 2",False,scorecolor)   
     screen.blit(playername2text,(screenwidth/2+20,screenheight/2-20))
     
-    pygame.draw.ellipse(screen,ballcolor,ball)
+    pygame.draw.ellipse(screen,ballcolor,ball) 
            
     if win1time:
         display1win()
