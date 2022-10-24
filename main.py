@@ -36,9 +36,21 @@ def ballanimation():
         scoretime=pygame.time.get_ticks()
         
     #collide with player
-    if ball.colliderect(player1) or ball.colliderect(player2):
-        ballspeedx*=-1            
-
+    if ball.colliderect(player2) and ballspeedx>0:
+        if abs(ball.right-player2.left)<10:
+            ballspeedx*=-1          
+        elif abs(ball.bottom-player2.top)<10 and ballspeedy>0:
+            ballspeedy*=-1
+        elif abs(ball.top-player2.bottom)<10 and ballspeedy<0:
+            ballspeedy*=-1    
+    if ball.colliderect(player1) and ballspeedx<0: 
+        if abs(ball.left-player1.right)<10:
+            ballspeedx*=-1          
+        elif abs(ball.bottom-player1.top)<10 and ballspeedy>0:
+            ballspeedy*=-1
+        elif abs(ball.top-player1.bottom)<10 and ballspeedy<0:
+            ballspeedy*=-1           
+             
 #ball regeneration
 def ballstart():
     global ballspeedx,ballspeedy,scoretime
@@ -107,8 +119,8 @@ wincolor=(255,0,127)
 
 #creating shapes
 ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
-player1=pygame.Rect(10, screenheight / 2 - 70, 10,120)
-player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70, 10,120) 
+player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
+player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70,10,120) 
 
 #speed 
 ballspeed=4
