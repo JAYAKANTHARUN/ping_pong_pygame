@@ -1,5 +1,5 @@
 #import pygame library
-import pygame,sys,random,math,os
+import pygame,sys,random,math
 
 #player animation
 def playeranimation():
@@ -96,6 +96,7 @@ def display2win():
         sys.quit()        
 
 pygame.mixer.pre_init(44100,-16,2,512)
+
 pygame.init()
 
 clock=pygame.time.Clock()
@@ -159,9 +160,8 @@ winscore=5
 aimfont=pygame.font.SysFont("algerian",25)
 
 #sound
-s='sound'
-pongsound=pygame.mixer.Sound((os.path.join(s, 'pong.ogg')))
-scoresound=pygame.mixer.Sound("score.wav")
+pongsound=pygame.mixer.Sound("pong.ogg")
+scoresound=pygame.mixer.Sound("score.ogg")
 
 
 #run the window
