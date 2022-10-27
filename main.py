@@ -22,17 +22,17 @@ def ballanimation():
     
     #bounce back and regeneration
     if ball.top<=10 or ball.bottom>=screenheight-10:
-        pygame.mixer.Sound.play(pongsound)
+        #pygame.mixer.Sound.play(pongsound)
         ballspeedy*=-1
     if ball.left<=10:
-        pygame.mixer.Sound.play(scoresound)
+        #pygame.mixer.Sound.play(scoresound)
         player2score+=1 
         if player2score==winscore:
             win2time=pygame.time.get_ticks()#return present time in milliseconds
         scoretime=pygame.time.get_ticks()
         
     if ball.right>=screenwidth-10:
-        pygame.mixer.Sound.play(scoresound)
+        #pygame.mixer.Sound.play(scoresound)
         player1score+=1  
         if player1score==winscore:
             win1time=pygame.time.get_ticks()  
@@ -40,7 +40,7 @@ def ballanimation():
         
     #collide with player
     if ball.colliderect(player2) and ballspeedx>0:
-        pygame.mixer.Sound.play(pongsound)
+        #pygame.mixer.Sound.play(pongsound)
         if abs(ball.right-player2.left)<10:
             ballspeedx*=-1          
         elif abs(ball.bottom-player2.top)<10 and ballspeedy>0:
@@ -48,7 +48,7 @@ def ballanimation():
         elif abs(ball.top-player2.bottom)<10 and ballspeedy<0:
             ballspeedy*=-1    
     if ball.colliderect(player1) and ballspeedx<0: 
-        pygame.mixer.Sound.play(pongsound)
+       #pygame.mixer.Sound.play(pongsound)
         if abs(ball.left-player1.right)<10:
             ballspeedx*=-1          
         elif abs(ball.bottom-player1.top)<10 and ballspeedy>0:
@@ -160,8 +160,8 @@ winscore=5
 aimfont=pygame.font.SysFont("algerian",25)
 
 #sound
-pongsound=pygame.mixer.Sound("pong.ogg")
-scoresound=pygame.mixer.Sound("score.ogg")
+#pongsound=pygame.mixer.Sound("pong.ogg")
+#wscoresound=pygame.mixer.Sound("score.ogg")
 
 
 #run the window
