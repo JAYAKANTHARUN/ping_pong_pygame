@@ -102,8 +102,8 @@ pygame.init()
 clock=pygame.time.Clock()
 
 #creating new window
-screenwidth=1000
-screenheight=700
+screenwidth=1500
+screenheight=800
 screen=pygame.display.set_mode((screenwidth,screenheight)) 
 
 #name for window
@@ -131,7 +131,7 @@ player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70,10,120) 
 
 #speed 
-ballspeed=4
+ballspeed=6
 ballspeedx=ballspeed * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
 ballspeedy=ballspeed * random.choice((1,-1))
 player1speed=0
