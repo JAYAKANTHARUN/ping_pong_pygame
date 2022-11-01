@@ -5,16 +5,28 @@ import os
 
 root=Tk()
 
-def startgame():
-    os.system("python main.py")
+r=IntVar()
+r.set("1")
+
+def startgame(number):
+    if number==1:
+        os.system("python main.py")
+    if number==2:
+        os.system("python 2p.py")
+    if number==3:
+        os.system("python 4p.py")        
  
 def quitgame():
     messagebox.showinfo("Message","THANK YOU FOR PLAYING")
-    root.destroy()    
+    root.destroy()  
+    
+def control():
+    messagebox.showinfo("CONTROLS","MOVEMENT\nCPU -- UPARROW,DOWNARROW\n2 PLAYERS -- W,S/UPARROW,DOWNARROW\n4 PLAYERS -- W,S/UPARROW,DOWNARROW/O,P/N,M")      
 
 root.title("PING PONG GAME")
 
-root.geometry("1500x800")
+root.attributes("-fullscreen",True)
+
 root.configure(bg="black")
 
 image1=PhotoImage(file="tkimage.png")
@@ -30,11 +42,19 @@ label2=Label(root,text="\n\n\n\tABOUT THE GAME :-",font=("algerian",20),bg="blac
 label3=Label(root,text="\t-> THIS IS A BASIC PING PONG GAME",font=("algerian",20),bg="black",fg="orange").pack(anchor="w")
 label4=Label(root,text="\t-> ITS A 1VS1 GAME",font=("algerian",20),bg="black",fg="orange").pack(anchor="w")
 label5=Label(root,text="\t-> FIRST PLAYER TO SCORE 5 POINTS WINS",font=("algerian",20),bg="black",fg="orange").pack(anchor="w")
-label6=Label(root,text="\t-> A RELAX TIME OF 3 SECONDS WILL BE GIVEN AT THE START AND ALSO AFTER EACH POINT\n\n",font=("algerian",20),bg="black",fg="orange").pack(anchor="w")
+label6=Label(root,text="\t-> A RELAX TIME OF 3 SECONDS WILL BE GIVEN AT THE START AND ALSO AFTER EACH POINT\n",font=("algerian",20),bg="black",fg="orange").pack(anchor="w")
 
-button1=Button(root,text="\nSTART THE GAME\n",bg="lightgreen",command=startgame,width=20).pack()
-label7=Label(root,text="\n\n",bg="black").pack()
+Radiobutton(root,text="CPU",variable=r,value=1,bg="yellow",width=10).pack()
+#label9=Label(root,text="\n",bg="black").pack()
+Radiobutton(root,text="2 PLAYERS",variable=r,value=2,bg="yellow",width=10).pack()
+#label10=Label(root,text="\n",bg="black").pack()
+Radiobutton(root,text="4 PLAYERS",variable=r,value=3,bg="yellow",width=10).pack()
+label11=Label(root,text="\n",bg="black").pack()
+
+button3=Button(root,text="\nCONTROLS\n",command=control,bg="lightgreen",width=20).pack()
+label8=Label(root,text="\n",bg="black").pack()
+button1=Button(root,text="\nSTART THE GAME\n",bg="lightgreen",command=lambda:startgame(r.get()),width=20).pack()
+label7=Label(root,text="\n",bg="black").pack()
 button2=Button(root,text="\nQUIT GAME\n",bg="lightgreen",command=quitgame,width=20).pack()
-
 
 root.mainloop()
