@@ -7,10 +7,17 @@ def playeranimation():
         player1.top=10
     if player1.bottom>=screenheight-10:
         player1.bottom=screenheight-10
+
+#CPU movement        
+def aianimation():
+    if player2.top<ball.y:
+        player2.top+=speed
+    if player2.bottom>ball.y:
+        player2.bottom-=speed
     if player2.top<=10:
         player2.top=10
-    if player2.bottom>=screenheight-10:
-        player2.bottom=screenheight-10
+    if player2.bottom>=screenheight-10:                
+        player2.bottom=screenheight-10        
 
 #ball animation
 def ballanimation():
@@ -89,7 +96,7 @@ def display2win():
     close2time=pygame.time.get_ticks()
     if close2time-win2time<2000:
         ballspeedx,ballspeedy=0,0
-        win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
+        win2text=winfont.render("!! CPU wins !!",False,wincolor)   
         screen.blit(win2text,(screenwidth/2+20,screenheight/2+100))
     else:
         pygame.quit()
@@ -131,12 +138,12 @@ player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
 player2=pygame.Rect(screenwidth - 20, screenheight / 2 - 70,10,120) 
 
 #speed 
-ballspeed=6
+ballspeed=5
 ballspeedx=ballspeed * random.choice((1,-1))#this is done so that ball will move in random direction after colliding with side walls
 ballspeedy=ballspeed * random.choice((1,-1))
 player1speed=0
 player2speed=0
-speed=4
+speed=5
 
 #score details
 player1score=0
@@ -181,18 +188,7 @@ while True:
             if event.key==pygame.K_s:
                 player1speed-=speed
             if event.key==pygame.K_w:
-                player1speed+=speed 
-                
-        if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_DOWN:
-                player2speed+=speed
-            if event.key==pygame.K_UP:
-                player2speed-=speed 
-        if event.type==pygame.KEYUP:
-            if event.key==pygame.K_DOWN:
-                player2speed-=speed
-            if event.key==pygame.K_UP:
-                player2speed+=speed    
+                player1speed+=speed   
     
     player1.y+=player1speed
     player2.y+=player2speed
@@ -200,6 +196,8 @@ while True:
     ballanimation()
     
     playeranimation()
+    
+    aianimation()
     
     #drawing objects and Lines        
     screen.fill(bgcolor)        
@@ -212,8 +210,8 @@ while True:
     pygame.draw.line(screen,linecolor,[screenwidth/2,10],[screenwidth/2,screenheight-10])
     
     #displays welcome message
-    welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
-    screen.blit(welcometext,(screenwidth/2-250,20))
+    #welcometext=welcomefont.render("Welcome to my ping pong game",False,welcomecolor)   
+    #screen.blit(welcometext,(screenwidth/2-250,20))
     
     aimtext=aimfont.render(f"First to score {winscore} point wins",False,aimcolor)
     screen.blit(aimtext,(screenwidth/2-175,screenheight-50))
@@ -225,7 +223,7 @@ while True:
     screen.blit(player2text,(screenwidth/2+20,screenheight/2))
     playername1text=scorefont.render("Player 1",False,scorecolor)   
     screen.blit(playername1text,(screenwidth/2-115,screenheight/2-20))
-    playername2text=scorefont.render("Player 2",False,scorecolor)   
+    playername2text=scorefont.render("CPU",False,scorecolor)   
     screen.blit(playername2text,(screenwidth/2+20,screenheight/2-20))
     
     pygame.draw.ellipse(screen,ballcolor,ball) 

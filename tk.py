@@ -10,7 +10,7 @@ r.set("1")
 
 def startgame(number):
     if number==1:
-        os.system("python main.py")
+        os.system("python cpu.py")
     if number==2:
         os.system("python 2p.py")
     if number==3:
@@ -21,7 +21,7 @@ def quitgame():
     root.destroy()  
     
 def control():
-    messagebox.showinfo("CONTROLS","MOVEMENT\nCPU -- UPARROW,DOWNARROW\n2 PLAYERS -- W,S/UPARROW,DOWNARROW\n4 PLAYERS -- W,S/UPARROW,DOWNARROW/O,P/N,M")      
+    messagebox.showinfo("CONTROLS","MOVEMENT\nCPU -- W,S\n2 PLAYERS -- W,S/UPARROW,DOWNARROW\n4 PLAYERS -- W,S/UPARROW,DOWNARROW/O,P/N,M")      
 
 root.title("PING PONG GAME")
 
