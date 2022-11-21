@@ -109,8 +109,8 @@ pygame.init()
 clock=pygame.time.Clock()
 
 #creating new window
-screenwidth=1500
-screenheight=800
+screenwidth=1200
+screenheight=700
 screen=pygame.display.set_mode((screenwidth,screenheight)) 
 
 #name for window
