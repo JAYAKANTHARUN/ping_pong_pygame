@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk,Image
-import pygame,random,math
+import pygame,random,math,time
 
 def p2():
     global player1score,player2score,ballspeedx,ballspeedy,scoretime,win2time,win1time,winscore
@@ -24,19 +24,23 @@ def p2():
         
         if ball.top<=10 or ball.bottom>=screenheight-10:
             ballspeedy*=-1
+            pygame.mixer.Sound.play(pongsound)
         if ball.left<=10:
+            pygame.mixer.Sound.play(scoresound)
             player2score+=1 
             if player2score==winscore:
                 win2time=pygame.time.get_ticks()
             scoretime=pygame.time.get_ticks()
             
         if ball.right>=screenwidth-10:
+            pygame.mixer.Sound.play(scoresound)
             player1score+=1  
             if player1score==winscore:
                 win1time=pygame.time.get_ticks()  
             scoretime=pygame.time.get_ticks()
             
         if ball.colliderect(player2) and ballspeedx>0:
+            pygame.mixer.Sound.play(pongsound)
             if abs(ball.right-player2.left)<10:
                 ballspeedx*=-1          
             elif abs(ball.bottom-player2.top)<10 and ballspeedy>0:
@@ -44,6 +48,7 @@ def p2():
             elif abs(ball.top-player2.bottom)<10 and ballspeedy<0:
                 ballspeedy*=-1    
         if ball.colliderect(player1) and ballspeedx<0: 
+            pygame.mixer.Sound.play(pongsound)
             if abs(ball.left-player1.right)<10:
                 ballspeedx*=-1          
             elif abs(ball.bottom-player1.top)<10 and ballspeedy>0:
@@ -70,7 +75,7 @@ def p2():
         close1time=pygame.time.get_ticks()
         if close1time-win1time<2000:
             ballspeedx,ballspeedy=0,0
-            win1text=winfont.render("!! Player1 wins !!",False,wincolor)   
+            win1text=winfont.render("!! Player1 wins !!",False,wincolor)
             screen.blit(win1text,(screenwidth/2-360,screenheight/2+100))
         else:
             pygame.quit()   
@@ -81,7 +86,7 @@ def p2():
         close2time=pygame.time.get_ticks()
         if close2time-win2time<2000:
             ballspeedx,ballspeedy=0,0
-            win2text=winfont.render("!! Player2 wins !!",False,wincolor)   
+            win2text=winfont.render("!! Player2 wins !!",False,wincolor)  
             screen.blit(win2text,(screenwidth/2+20,screenheight/2+100))
         else:
             pygame.quit()           
@@ -109,6 +114,9 @@ def p2():
     scorecolor=(0,96,255)
     timecolor=(255,0,255)
     wincolor=(255,0,127)
+    
+    scoresound=pygame.mixer.Sound("score.wav")
+    pongsound=pygame.mixer.Sound("pong.wav")
 
     ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
     player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
@@ -132,7 +140,7 @@ def p2():
     win2time=None
     winfont=pygame.font.SysFont("script",50)
     winscore=5
-
+    
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -223,20 +231,24 @@ def cpu():
         ball.y+=ballspeedy   
         
         if ball.top<=10 or ball.bottom>=screenheight-10:
+            pygame.mixer.Sound.play(pongsound)
             ballspeedy*=-1
         if ball.left<=10:
+            pygame.mixer.Sound.play(scoresound)
             player2score+=1 
             if player2score==winscore:
                 win2time=pygame.time.get_ticks()
             scoretime=pygame.time.get_ticks()
             
         if ball.right>=screenwidth-10:
+            pygame.mixer.Sound.play(scoresound)
             player1score+=1  
             if player1score==winscore:
                 win1time=pygame.time.get_ticks()  
             scoretime=pygame.time.get_ticks()
             
         if ball.colliderect(player2) and ballspeedx>0:
+            pygame.mixer.Sound.play(pongsound)
             if abs(ball.right-player2.left)<10:
                 ballspeedx*=-1          
             elif abs(ball.bottom-player2.top)<10 and ballspeedy>0:
@@ -244,6 +256,7 @@ def cpu():
             elif abs(ball.top-player2.bottom)<10 and ballspeedy<0:
                 ballspeedy*=-1    
         if ball.colliderect(player1) and ballspeedx<0: 
+            pygame.mixer.Sound.play(pongsound)
             if abs(ball.left-player1.right)<10:
                 ballspeedx*=-1          
             elif abs(ball.bottom-player1.top)<10 and ballspeedy>0:
@@ -310,6 +323,9 @@ def cpu():
     scorecolor=(0,96,255)
     timecolor=(255,0,255)
     wincolor=(255,0,127)
+    
+    scoresound=pygame.mixer.Sound("score.wav")
+    pongsound=pygame.mixer.Sound("pong.wav")
 
     ball=pygame.Rect(screenwidth/2-10,screenheight/2-10,20,20)
     player1=pygame.Rect(10, screenheight / 2 - 70,10,120)
@@ -392,11 +408,13 @@ def cpu():
 
 root=Tk()
 
+pygame.init()
+
 r=IntVar()
 r.set("1")
 
 def startgame(number):
-    if number==1: 
+    if number==1:
         cpu()
     if number==2:
         p2()       
